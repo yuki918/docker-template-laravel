@@ -2,7 +2,7 @@
 
 このリポジトリは、Laravelのローカル開発環境を素早く構築するためのDocker Composeテンプレートです。
 
-## 🧱 構成
+## 構成
 
 - PHP 8.2
 - Nginx 1.27
@@ -23,7 +23,7 @@
 
 ```
 
-## 🚀 セットアップ手順
+## セットアップ手順
 
 ### 1. リポジトリをクローン
 
@@ -76,3 +76,6 @@ rm -rf *
 # Laravelのインストール
 composer create-project --prefer-dist "laravel/laravel=" .
 ```
+
+下記で閲覧できれば、構築完了です。<br>
+http://localhost:8080
