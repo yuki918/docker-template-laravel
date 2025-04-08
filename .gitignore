@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 環境変数
+.env
+.env.backup
+.env.production
+
+# docker
+/docker/db/data/

@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  # webサーバー
+  web:
+    # コンテナを作成するために、ビルドコンテキストである下記ディレクトリ（の中にあるDockerfile）を参照している
+    build:
+      context: "./docker/web"
+    # ホスト側のポート:コンテナ側のポートを指定
+    ports:
+      - "8080:80"
+    # src配下のファイルをコンテナ内の~/va/www/html配下に配置
+    volumes:
+      - "./src:/var/www/html"
+
+  # PHPサーバー
+  php:
+    build:
+      context: "./docker/php"
+    volumes:
+      - "./src:/var/www/html"
+
+  # dbサーバー
+  db:
+    build:
+      context: "./docker/db"
+    ports:
+      - "3306:3306"
+    # 環境変数の指定
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}"
+      - "MYSQL_DATABASE=${DB_DATABASE}"
+      - "MYSQL_USER=${DB_USER}"
+      - "MYSQL_PASSWORD=${DB_PASSWORD}"
+    volumes:
+      - "./docker/db/data:/var/lib/mysql"
