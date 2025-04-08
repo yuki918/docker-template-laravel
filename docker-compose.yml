@@ -3,6 +3,8 @@ version: "3.9"
 services:
   # webサーバー
   web:
+    # コンテナ名（必要であれば、適宜修正する）
+    # container_name: "docker-template-laravel-web"
     # コンテナを作成するために、ビルドコンテキストである下記ディレクトリ（の中にあるDockerfile）を参照している
     build:
       context: "./docker/web"
@@ -15,6 +17,8 @@ services:
 
   # PHPサーバー
   php:
+    # コンテナ名（必要であれば、適宜修正する）
+    # container_name: "docker-template-laravel-php"
     build:
       context: "./docker/php"
     volumes:
@@ -22,6 +26,8 @@ services:
 
   # dbサーバー
   db:
+    # コンテナ名（必要であれば、適宜修正する）
+    # container_name: "docker-template-laravel-db"
     build:
       context: "./docker/db"
     ports:
