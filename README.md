@@ -20,16 +20,19 @@
 ├─ src
 │   └─ 【Laravelのパッケージ】
 └─ docker-compose.yml
-
 ```
 
 ## セットアップ手順
 
 ### 1. リポジトリをクローン
 
+本リポジトリは[テンプレート化](https://docs.github.com/ja/repositories/creating-and-managing-repositories/creating-a-template-repository)しているため、再利用することが可能です。  
+[こちら](https://docs.github.com/ja/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)の手順にしたがって、リポジトリを作成してください。  
+作成したリポジトリをクローンします。
+
 ```bash
-git clone https://github.com/yuki918/docker-template-laravel.git
-cd docker-template-laravel
+git clone https://github.com/yuki918/new-laravel-project.git
+cd new-laravel-project
 ```
 
 ### 2. コンテナを起動
@@ -64,16 +67,27 @@ DB_USERNAME=dockerの.envファイルのDB_USER
 DB_PASSWORD=dockerの.envファイルのDB_PASSWORD
 ```
 
-### 3. Laravelを最新バージョンへ
+### 3. Laravelの設定
 
 ```bash
 # コンテナへ入る
 docker compose exec php bash
 
-# 全てのファイルの削除
-rm -rf *
+# ライブラリのインストール
+composer install
 
-# Laravelのインストール
+# 権限の変更
+chmod -R 775 storage storage
+chmod -R 775 storage bootstrap/cache
+
+# アプリケーションキーを生成
+php artisan key:generate
+
+# マイグレーションの実行
+php artisan migrate 
+
+# 最新のLaravelで構築したい場合は、ファイルをすべて削除して、もう一度Laravelを入れなおす
+rm -rf *
 composer create-project --prefer-dist "laravel/laravel=" .
 ```
 
